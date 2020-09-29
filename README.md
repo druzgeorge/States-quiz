@@ -9,15 +9,9 @@ If you wanna create a test for kids on geog about the us states and wanna have t
 then this is the place to beeeeeeeeee.
 
 
-All you have to do is just run the shell script
+All you have to do is just run pythonquizgame.py
 
-
-It works if youre on mac or linux 
-
-or if youre on windows run python quizgame.py
-
-And it should work boyyyyyyyyyy
-
+it works on everything bruh.
 
 
 Thanks bruhhhhhhhhhhhhhhhhh
