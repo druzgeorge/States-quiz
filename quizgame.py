@@ -3,10 +3,13 @@
 
 # import modules
 import random,os
+#cool progress bar
+from tqdm import tqdm
 from pathlib import Path
-
+import sys
+sys.append('.')
 #import the states
-import states 
+import states
 
 #create the multiple choice
 def multiple_choice(correct_answer,statesdict):
@@ -37,13 +40,15 @@ def create_files(folderpath,filenum,statesdict):
   #shuffle them
   random.shuffle(states)
   #make text file for the quiz
-  filename = "quiz" + str(filenum) + ".txt"
+  filename = f'1uiz{filenum}.txt'
   #make text file for answers
-  ansfilename = "cheatsheet" + str(filenum) + ".txt"
+  ansfilename = f'cheatsheet{filenum}.txt'
   #open file
-  ansfile = open(folderpath / ansfilename, 'w')
+  ansfilename = os.path.join(folderpath,ansfilename)
+  ansfile  = open(ansfilename, 'w')
   #open files
-  with open(str(folderpath / filename),"w") as quiz:
+  quizfilename_path = os.path.join(folderpath, filename)
+  with open(quizfilename_path,"w") as quiz:
     #write heading
     quiz.write(" " * 20 + "Capital quiz" + "\n\n")
     #write child details
@@ -78,11 +83,12 @@ def create_files(folderpath,filenum,statesdict):
       #add 1 to make new question number
       quiznumber += 1
     #note for kids (:{)
-    quiz.write("THOUGH YOU COULD CHEAT HUH?")
+    quiz.write("THOUGHT YOU COULD CHEAT HUH?")
     #newline
     quiz.write("\n")
     #close ans file
     ansfile.close()
+ quiz.close()
     
     
     
@@ -91,13 +97,18 @@ def create_files(folderpath,filenum,statesdict):
 #generate 35 diferrent quizes
 def main():
   #create folder
-  quiz_folder = Path(Path.cwd() / 'quizes')
+  quiz_foldername = ('quizes')
+  quiz_folder = os.path.join(os.getcwd(), quiz_foldername)
   #check if the directory is there or not
-  if not quiz_folder.exists():
-    os.makedirs(str(quiz_folder))
-    print("New directory created")
-  else:
-    print("Directory already created")  
+ if os.path.exists(quiz_folder) :
+    print('Quiz folder already exists!')
+ else:
+    print('Quiz folder does not eixst creating it.')
+    #gotta have some progress bars!
+    for i in tqdm(range(100)):
+      
+      print('.', end='', flush=True)
+      pass #just do nothing.Just need some progress bars!
   #create 35 files
   for num in range(35):
     #file number
@@ -105,6 +116,9 @@ def main():
     #create the files 
     create_files(quiz_folder,filenum,states.states) 
   #Give message
+  #need another progress bar
+  for i in tqdm(range(100)):
+    print('.', end='', flush=True)
   print("Files successfully written")
 #run main    
 if __name__ == '__main__':
